@@ -40,3 +40,5 @@ C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\bin\Debug\netco
 C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\bin\Debug\netcoreapp3.1\Npgsql.dll
 C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\obj\Debug\netcoreapp3.1\WorkerService2.dll
 C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\obj\Debug\netcoreapp3.1\WorkerService2.pdb
+C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\bin\Debug\netcoreapp3.1\log4net.dll
+C:\Users\Josip Vukoja\source\repos\WorkerService2\WorkerService2\bin\Debug\netcoreapp3.1\log4net.config

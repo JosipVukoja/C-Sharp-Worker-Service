@@ -4,21 +4,18 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System.IO;
 using Npgsql;
+using log4net;
+using log4net.Config;
+using System.Reflection;
 
 namespace WorkerService2
 {
     public class Worker : BackgroundService
     {
-        public readonly ILogger<Worker> _logger;
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public Worker(ILogger<Worker> logger)
-        {
-            _logger = logger;
-        }
-        
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
@@ -114,6 +111,9 @@ namespace WorkerService2
                 userInput = int.Parse(Console.ReadLine());
                 Console.WriteLine(userInput);
 
+                var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+                XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+
                 for (int i = 0; i < userInput; i++)
                 {
 
@@ -129,12 +129,17 @@ namespace WorkerService2
                     Random random4 = new Random();
                     string serverstatus = server_status[random4.Next(server_status.Count)];
 
-                    string message = "Log info " + DateTimeOffset.Now + "  " + information + " at address " +
-                        ipaddress + " and server name " + servername + " with status " + serverstatus + "\n";
-                    _logger.LogInformation(message);
+                    string message = DateTimeOffset.Now + information + " at address " +
+                        ipaddress + " and server name " + servername + " with status " + serverstatus;
+                    
+                    log.Info(message);
+                    log.Error(message);
+                    log.Warn(message);
+                    log.Debug(message);
+                    log.Fatal(message);
 
-                    using (StreamWriter sw = File.AppendText(@"C:\LogFolder\WriteText.log"))
-                        sw.WriteLine(message);
+                   // using (StreamWriter sw = File.AppendText(@"C:\LogFolder\WriteText.log"))
+                     //   sw.WriteLine(message);
                     await Task.Delay(100, stoppingToken);
                 }
             }
