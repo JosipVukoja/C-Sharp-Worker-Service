@@ -72,7 +72,7 @@ namespace WorkerService2
 
 
 
-                string sql3 = "SELECT * FROM server_name, server_status";
+                string sql3 = "SELECT * FROM server_name";
 
                 using var cmd3 = new NpgsqlCommand(sql3, con);
 
@@ -135,7 +135,7 @@ namespace WorkerService2
 
                     using (StreamWriter sw = File.AppendText(@"C:\LogFolder\WriteText.log"))
                         sw.WriteLine(message);
-                    await Task.Delay(2000, stoppingToken);
+                    await Task.Delay(100, stoppingToken);
                 }
             }
         }
